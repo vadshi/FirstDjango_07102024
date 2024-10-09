@@ -38,12 +38,6 @@ def about(request):
         """
     return HttpResponse(text)
 
-
-# /item/1
-# /item/2
-# ...
-# /item/n - 1
-# /item/n
 def get_item(request, item_id: int):
     """ По указанному id возвращает элемент из списка"""
     for item in items:
@@ -58,8 +52,5 @@ def get_item(request, item_id: int):
 
 
 def get_items(request):
-    result = "<h1> Список товаров </h1><ol>"
-    for item in items:
-        result += f""" <li><a href='/item/{item["id"]}'> {item["name"]} </a> </li> """
-    result += "</ol>"
-    return HttpResponse(result)
+    context = {"items": items}
+    return render(request, "items_list.html", context)

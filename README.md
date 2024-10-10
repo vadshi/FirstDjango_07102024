@@ -17,6 +17,24 @@
 python manage.py shell_plus --ipython
 ```
 
+## Выгрузка и загрузка данных при работе с БД
+### Выгрузка данных из БД
+```
+python manage.py dumpdata MainApp --indent 4 > MainApp/fixtures/save_all.json
+```
+
+### Загрузка данных в БД
+```
+python manage.py loaddata MainApp/fixtures/save_all.json
+```
+
+### Optional (only for Windows)
+```
+python -Xutf8 manage.py dumpdata MainApp --indent 4 -o MainApp/fixtures/save_all.json
+```
+
+
+
 ## Дополнительно 
 1. Полезное расширение для шаблонов `Django`
 ```

@@ -35,11 +35,14 @@ def about(request):
 
 def get_item(request, item_id: int):
     """ По указанному id возвращает элемент из списка"""
-    for item in items:
-        if item['id'] == item_id:
-            context = {"item": item}
-            return render(request, "item_page.html", context)
-    return HttpResponseNotFound(f'Item with id={item_id} not found')
+    try:
+        item = Item.objects.get(id=item_id)
+    except Item.DoesNotExist:
+        return HttpResponseNotFound(f'Item with id={item_id} not found')
+    else:
+        context = {"item": item}
+        return render(request, "item_page.html", context)
+    
 
 
 def get_items(request):
